@@ -15,13 +15,14 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
                 (r"/", MainPageHandler),
+                (r"/gnomed", GnomePageHandler),
             ]
 
         settings = dict(
                 template_path=TEMPLATES_DIRECTORY,
                 static_path=STATIC_DIRECTORY,
                 debug=True,
-            )
+             )
         tornado.web.Application.__init__(self, handlers, **settings)
 
 
@@ -31,10 +32,14 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class MainPageHandler(BaseHandler):
     def get(self):
-        print(self.get_argument('foo'))
-        self.render('main_page.html',
-                foo=self.get_argument('foo'),
-            )
+        self.render('main_page.html')
+
+class GnomePageHandler(BaseHandler):
+    def get(self):
+        self.render('gnomed.html',
+        		width=self.get_argument('width'),
+        		height=self.get_argument('height'),
+       		)
 
 
 if __name__ == "__main__":

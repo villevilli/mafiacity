@@ -3,9 +3,16 @@
 <head>
   <meta charset="utf-8">
   <title>Paras sivusto ikinä!</title>
+
+  <script type="text/javascript">
+  	function get_gnomed() {
+  		console.log();
+  		window.location = '/gnomed?width='+ window.innerWidth + '&height=' + window.innerHeight;
+  	}
+  </script>
 </head>
 <body>
-  <h1>Tosi Hieno sivusto.{{foo}} </h1>
-  {{foo}}
+  <h1>Tosi Hieno sivusto. foo</h1>
+  <button onclick="get_gnomed();">very nice button</button>
 </body>
 </html>
