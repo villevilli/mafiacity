@@ -42,9 +42,18 @@ class GnomePageHandler(BaseHandler):
        		)
 
 
+def load_config_file(config_file):
+    with open(config_file, 'r') as f:
+        return json.load(f)
+
 if __name__ == "__main__":
+    if (len(sys.argv) != 2):
+        print ("error: missing config file")
+        exit(0)
+    config = load_config_file(sys.argv[1])
+
     httpserver = tornado.httpserver.HTTPServer(Application())
-    PORT = 2001
+    PORT = config['port']
     httpserver.listen(PORT)
     print("Server listening port {}".format(PORT))
     tornado.ioloop.IOLoop.current().start()
