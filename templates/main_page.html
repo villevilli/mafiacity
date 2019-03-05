@@ -9,10 +9,18 @@
   	function get_gnomed() {
   		window.location = '/static/redirecter.html'
   	}
+    var w = window.innerWidth;
+    var h = window.innerHeight;
   </script>
 </head>
 <body>
-  <h1>Tosi Hieno sivusto. foo</h1>
-  <button onclick="get_gnomed();">very nice button</button>
+  <div> 
+    <h1>Tosi Hieno sivusto. foo</h1>
+    <navigationButton onclick="get_gnomed();">very nice button</button>
+    <navigationButton onclick="alert("see? nothing")">does nothing</button>
+  </div>
+  <div>
+    <img src="/static/pupu.jpg" alt="a bunny on some grass" width="w" height="h">
+  </div>
 </body>
 </html>
