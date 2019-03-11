@@ -16,6 +16,7 @@ class Application(tornado.web.Application):
         handlers = [
                 (r"/", MainPageHandler),
                 (r"/gnomed", GnomePageHandler),
+                (r"/mafiaclient", MafiaPageHandler),
             ]
 
         settings = dict(
@@ -33,6 +34,10 @@ class BaseHandler(tornado.web.RequestHandler):
 class MainPageHandler(BaseHandler):
     def get(self):
         self.render('main_page.html')
+
+class MafiaPageHandler(BaseHandler):
+    def get(self):
+        self.render('mafiaclient.html')
 
 class GnomePageHandler(BaseHandler):
     def get(self):
