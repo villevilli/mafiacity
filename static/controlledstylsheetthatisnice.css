@@ -1,31 +1,36 @@
-h1{
+h1 {
 	font-family: "Verdana", Times, Sans-serif;
 	margin: 0;
 	background-color: #4CAF50; /* Green */
 	color: white;
 }
-.bloodredbutton{
+
+.bloodredbutton {
 	background-color: 	white;
 	color: black;
 	border: ;
 	border: 2px solid #AA0000;
 }
-.bloodredbutton:hover{
+
+.bloodredbutton:hover {
 	background-color: 	#AA0000; /*blood red*/
   	color: white;
    	border: 2px solid #AA0000;
 }
-.greenbutton{
+
+.greenbutton {
 	background-color: white
 	color: black;
 	border: 2px solid #4CAF50;
 }
-.greenbutton:hover{
+
+.greenbutton:hover {
 	background-color: #4CAF50;¨/* Green */
 	color: white;
 	border: 2px solid #4CAF50;
 }
-navigationButton, a{
+
+navigationButton, a {
   	padding: 10px 32px;
   	text-align: center;
   	text-decoration: none;
@@ -37,7 +42,8 @@ navigationButton, a{
   	cursor: pointer;
 	font-family: "Verdana", Times, Sans-serif;	
 }
-body{
+
+body {
 	margin: 0;
 	background-color: white;
 }
