@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+		<script src="{{ static_url('chat.js') }}"></script>
 		<title>this is how mafia works</title>
 		<link rel="stylesheet" type="text/css" href="{{ static_url('mafiastylsheet.css') }}">
 	</head>
@@ -10,10 +11,15 @@
 			<h1>mafiagame</h1>
 		</div>
 		<div id="chat" style="background: rgb(0,0,15);">
-			<p>(12:34) aperson: hello</p>
-			<p>(12:35) persona: hi</p>
+			<div id="chat_lines">
+				<p>(12:34) aperson: hello</p>
+				<p>(12:35) persona: hi</p>
+			</div>
 			<input type="text" name="chatinput">
-			<button>send</button>
+			<button onclick="send_message('foo bar');">send</button>
 		</div>
 	</body>
+	<script type="text/javascript">
+		open_chat_socket('Nimi');
+	</script>
 </html>

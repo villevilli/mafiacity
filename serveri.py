@@ -1,9 +1,12 @@
 import tornado.ioloop
 import tornado.web
 import tornado.httpserver
+import tornado.websocket
 import os
 import sys
 import json
+
+from datetime import datetime
 
 #import database as db
 
@@ -17,6 +20,7 @@ class Application(tornado.web.Application):
                 (r"/", MainPageHandler),
                 (r"/gnomed", GnomePageHandler),
                 (r"/mafiaclient", MafiaPageHandler),
+                (r"/chat_ws", ChatWebSocketHandler),
             ]
 
         settings = dict(
@@ -45,6 +49,31 @@ class GnomePageHandler(BaseHandler):
         		width=self.get_argument('width'),
         		height=self.get_argument('height'),
        		)
+
+player_sockets = []
+
+class ChatWebSocketHandler(tornado.websocket.WebSocketHandler):
+    def open(self):
+        print("New client")
+        self.name = None
+        if self not in player_sockets:
+            player_sockets.append(self)
+
+    def on_close(self):
+        print("Client lost")
+        while self in player_sockets:
+            player_sockets.remove(self)
+
+    def on_message(self, message):
+        print(message)
+        if message.startswith('name:'):
+            self.name = message.split(':')[1]
+        else:
+            data = {'name': self.name, 'message': message, 'timestamp': str(datetime.now())}
+            # for socket in player_sockets:
+            #     if socket != self:
+            #         socket.write_message(data)
+            self.write_message(data)
 
 
 def load_config_file(config_file):
