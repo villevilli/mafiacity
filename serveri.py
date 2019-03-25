@@ -69,11 +69,11 @@ class ChatWebSocketHandler(tornado.websocket.WebSocketHandler):
         if message.startswith('name:'):
             self.name = message.split(':')[1]
         else:
-            data = {'name': self.name, 'message': message, 'timestamp': str(datetime.now())}
-            # for socket in player_sockets:
-            #     if socket != self:
-            #         socket.write_message(data)
-            self.write_message(data)
+            data = {'name': self.name, 'message': message, 'timestamp': str(datetime.now().strftime('%Y-%m-%d %H.%M.%S'))}
+            for socket in player_sockets:
+                if socket != self:
+                    socket.write_message(data)
+            self.write_message(json.dumps(data))
 
 
 def load_config_file(config_file):

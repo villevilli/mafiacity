@@ -11,9 +11,9 @@ function open_chat_socket(name) {
   };
 
   chat_socket.onmessage = function (evt) {
-    console.log(evt.data.message);
-    var timestamp = evt.data.timestamp;
-    var message = evt.data.message;
+    var data = JSON.parse(evt.data);
+    var timestamp = data["timestamp"];
+    var message = data["message"];
     var p = document.createElement('p');
     p.innerHTML = timestamp + ': ' + message;
     chat_lines.appendChild(p);
@@ -24,10 +24,9 @@ function open_chat_socket(name) {
   };
 }
 
-function send_message(message) {
-  // if (chat_socket == null) {
-  //   open_chat_socket('Nimi');
-  // }
-  chat_socket.send(message);
+function send_message() {
+  var chat_input = document.getElementById('chatinput');
+  console.log(chat_input);
+  chat_socket.send(chat_input.value);
 }
 

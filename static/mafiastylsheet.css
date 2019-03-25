@@ -23,7 +23,7 @@ div#chat p {
 	font-size: 15px;
 	color: white;
 	padding: 0;
-	margin-left: 1000;
+	overflow-x: hidden;z
 }
 
 body { 
