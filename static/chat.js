@@ -1,6 +1,9 @@
 
 var chat_socket = null;
 var chat_lines = null;
+var messageamount = 0;
+var maxmessageamount = 15;
+
 
 function open_chat_socket(name) {
   chat_socket = new WebSocket("ws:"+window.location.host+"/chat_ws");
@@ -17,6 +20,13 @@ function open_chat_socket(name) {
     var p = document.createElement('p');
     p.innerHTML = timestamp + ': ' + message;
     chat_lines.appendChild(p);
+    messageamount++;
+    p.id = "msg" + messageamount;
+    console.log("( ͡° ͜ʖ ͡°)");
+    var old = document.getElementById("msg" + (messageamount - maxmessageamount));
+    if (old != null){
+      old.hidden=true;
+    }
   };
 
   chat_socket.onclose = function () {

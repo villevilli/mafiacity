@@ -18,12 +18,17 @@ h1 {
 	color: black;
 	margin-top: 0;
 }
-div#chat p {
+div#chat{
 	font-family: "fixedsys";
 	font-size: 15px;
 	color: white;
 	padding: 0;
-	overflow-x: hidden;z
+	overflow-x: hidden;
+  overflow-y: hidden;
+  float:  right;
+  width: 25%;
+  height: 85%;
+  max-height: 85%;
 }
 
 body { 
