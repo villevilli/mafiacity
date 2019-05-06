@@ -21,12 +21,14 @@ class Application(tornado.web.Application):
                 (r"/gnomed", GnomePageHandler),
                 (r"/mafiaclient", MafiaPageHandler),
                 (r"/chat_ws", ChatWebSocketHandler),
+                (r"/logout", LogoutHandler),
             ]
 
         settings = dict(
                 template_path=TEMPLATES_DIRECTORY,
                 static_path=STATIC_DIRECTORY,
                 debug=True,
+                cookie_secret="askjdhaskjdahk",
              )
         tornado.web.Application.__init__(self, handlers, **settings)
 
@@ -41,7 +43,31 @@ class MainPageHandler(BaseHandler):
 
 class MafiaPageHandler(BaseHandler):
     def get(self):
-        self.render('mafiaclient.html')
+        username = self.get_secure_cookie('user')
+        if not username:
+            self.render('mafiaclient_login.html')
+        else:
+            self.render_game()
+
+
+    def post(self):
+        username = self.get_argument('username')
+        self.set_secure_cookie('user', username)
+        self.render_game()
+
+    def render_game(self):
+        username = self.get_secure_cookie('user')
+        self.render('mafiaclient.html', 
+                username=username,
+            )
+
+class LogoutHandler(BaseHandler):
+    def get(self):
+        self.clear_cookie('user')
+        self.redirect('mafiaclient')
+
+
+        
 
 class GnomePageHandler(BaseHandler):
     def get(self):

@@ -11,6 +11,11 @@
     -moz-osx-font-smoothing: none;
     font-smooth: never;
 }
+html{
+  width: 100%;
+  height: 100%;
+}
+
 
 h1 {
 	font-family: "fixedsys";
@@ -30,11 +35,31 @@ div#chat{
   height: 85%;
   max-height: 85%;
 }
+div#logindiv{
+  width: 100%;
+  height: 100%;
+  text-align: center;
 
-body { 
+}
+
+body {
+    width: 100%;
+  height: 100%;
   background: url(/static/shutters.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  overflow: hidden;
+}
+
+input#username{
+ 
+}
+
+.loginThing{
+  border-radius: 7px;
+}
+h2{
+  font-family: "fixedsys";
 }
