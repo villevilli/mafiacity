@@ -47,3 +47,10 @@ body {
 	margin: 0;
 	background-color: white;
 }
+
+#normalText {
+  font: 13px Arial;
+  padding-left: 0px;
+  color: black;
+  cursor: default;
+}
