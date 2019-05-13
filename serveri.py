@@ -15,7 +15,7 @@ STATIC_DIRECTORY = os.path.abspath(os.path.join(APP_DIRECTORY, 'static'))
 TEMPLATES_DIRECTORY = os.path.abspath(os.path.join(APP_DIRECTORY, 'templates'))
 
 class Application(tornado.web.Application):
-    def __init__(self):
+    def __init__(self, config):
         handlers = [
                 (r"/", MainPageHandler),
                 (r"/gnomed", GnomePageHandler),
@@ -23,6 +23,8 @@ class Application(tornado.web.Application):
                 (r"/chat_ws", ChatWebSocketHandler),
                 (r"/logout", LogoutHandler),
             ]
+
+        self.config = config
 
         settings = dict(
                 template_path=TEMPLATES_DIRECTORY,
@@ -39,7 +41,9 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class MainPageHandler(BaseHandler):
     def get(self):
-        self.render('main_page.html')
+        self.render('main_page.html',
+                base_url="" if 'base_url' not in config else config['base_url'],
+            )
 
 class MafiaPageHandler(BaseHandler):
     def get(self):
@@ -57,7 +61,7 @@ class MafiaPageHandler(BaseHandler):
 
     def render_game(self):
         username = self.get_secure_cookie('user')
-        self.render('mafiaclient.html', 
+        self.render('mafiaclient.html',
                 username=username,
             )
 
@@ -67,7 +71,7 @@ class LogoutHandler(BaseHandler):
         self.redirect('mafiaclient')
 
 
-        
+
 
 class GnomePageHandler(BaseHandler):
     def get(self):
@@ -112,7 +116,7 @@ if __name__ == "__main__":
         exit(0)
     config = load_config_file(sys.argv[1])
 
-    httpserver = tornado.httpserver.HTTPServer(Application())
+    httpserver = tornado.httpserver.HTTPServer(Application(config))
     PORT = config['port']
     httpserver.listen(PORT)
     print("Server listening port {}".format(PORT))

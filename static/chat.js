@@ -6,7 +6,7 @@ var maxmessageamount = 15;
 
 
 function open_chat_socket(name) {
-  chat_socket = new WebSocket("ws:"+window.location.host+"/chat_ws");
+  chat_socket = new WebSocket(window.location.host+"/chat_ws");
   chat_lines = document.getElementById('chat_lines');
 
   chat_socket.onopen = function() {
